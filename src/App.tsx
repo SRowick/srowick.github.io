@@ -49,9 +49,7 @@ function AnimatedRoutes() {
           path="/"
           element={
             <MotionWrapper>
-              <Suspense fallback={<SpinnerFullPage />}>
-                <Homepage />
-              </Suspense>
+              <Homepage />
             </MotionWrapper>
           }
         />
@@ -59,9 +57,7 @@ function AnimatedRoutes() {
           path="/:gameId"
           element={
             <MotionWrapper>
-              <Suspense fallback={<SpinnerFullPage />}>
-                <GamePage />
-              </Suspense>
+              <GamePage />
             </MotionWrapper>
           }
         />
@@ -69,9 +65,7 @@ function AnimatedRoutes() {
           path="*"
           element={
             <MotionWrapper>
-              <Suspense fallback={<SpinnerFullPage />}>
-                <Homepage />
-              </Suspense>
+              <Homepage />
             </MotionWrapper>
           }
         />
@@ -84,9 +78,11 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        <div>
-          <AnimatedRoutes />
-        </div>
+        <Suspense fallback={<SpinnerFullPage />}>
+          <div>
+            <AnimatedRoutes />
+          </div>
+        </Suspense>
       </BrowserRouter>
     </ThemeProvider>
   );
