@@ -5,6 +5,7 @@ import { lazy, Suspense, type ReactNode } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import SpinnerFullPage from "./components/SpinnerFullPage";
 import Homepage from "./pages/Homepage";
+import { useImagePreloader } from "./hooks/useImagePreloader.tsx";
 
 const theme = createTheme({
   typography: {
@@ -75,14 +76,27 @@ function AnimatedRoutes() {
 }
 
 function App() {
+  const imageUrlsToPreload = [
+    "/odysseus.png",
+    "/projects/perseus.png",
+    "/projects/logo.png",
+    // Add any other images that are absolutely critical for the initial render of HomePage
+  ];
+
+  const imagesLoaded = useImagePreloader(imageUrlsToPreload);
+
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        <Suspense fallback={<SpinnerFullPage />}>
-          <div>
-            <AnimatedRoutes />
-          </div>
-        </Suspense>
+        {imagesLoaded ? (
+          <Suspense fallback={<SpinnerFullPage />}>
+            <div>
+              <AnimatedRoutes />
+            </div>
+          </Suspense>
+        ) : (
+          <SpinnerFullPage />
+        )}
       </BrowserRouter>
     </ThemeProvider>
   );
