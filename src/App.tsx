@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { lazy, Suspense, type ReactNode } from "react";
+import { lazy, Suspense, useEffect, useState, type ReactNode } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import SpinnerFullPage from "./components/SpinnerFullPage";
 import Homepage from "./pages/Homepage";
@@ -21,6 +21,7 @@ const theme = createTheme({
   },
 });
 
+// The user might not be going to GamePage
 const GamePage = lazy(() => import("./pages/GamePage"));
 
 // Motion wrapper for page transitions
@@ -76,12 +77,24 @@ function AnimatedRoutes() {
 }
 
 function App() {
-  const imageUrlsToPreload = [
-    "/logo.png",
-    "/projects/perseus.jpg",
-    "/projects/odysseus.jpg",
-    // Add any other images that are absolutely critical for the initial render of HomePage
-  ];
+  // Preload these images, because it looks janky when FadeInUp plays with half-loaded images.
+  const [imageUrlsToPreload, setImageUrlsToPreload] = useState(["/logo.png"]);
+
+  useEffect(() => {
+    async function loadProjectImages() {
+      // Vite glob import finds all files in the projects folder
+      const modules = import.meta.glob("/public/projects/*.{png,jpg}", {
+        eager: true,
+      });
+      const projectImageUrls = Object.values(modules).map((module) => {
+        return (module as { default: string }).default;
+      });
+
+      setImageUrlsToPreload((prevUrls) => [...prevUrls, ...projectImageUrls]);
+    }
+
+    loadProjectImages();
+  }, []);
 
   const imagesLoaded = useImagePreloader(imageUrlsToPreload);
 

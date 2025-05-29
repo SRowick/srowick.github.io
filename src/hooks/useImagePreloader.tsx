@@ -1,4 +1,3 @@
-// hooks/useImagePreloader.ts
 import { useState, useEffect } from "react";
 import { preload } from "react-dom";
 
