@@ -31,7 +31,7 @@ function GamePage() {
         }}
       >
         <img
-          src={`/pageBackgrounds/${project.page}.png`}
+          src={`/pageBackgrounds/${project.page}.jpg`}
           alt="Background"
           style={{
             height: "auto",
