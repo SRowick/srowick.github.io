@@ -4,6 +4,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { lazy, Suspense, type ReactNode } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import SpinnerFullPage from "./components/SpinnerFullPage";
+import { preload } from "react-dom";
 
 const theme = createTheme({
   typography: {
@@ -36,6 +37,16 @@ const MotionWrapper = ({ children }: { children: ReactNode }) => (
 
 function AnimatedRoutes() {
   const location = useLocation();
+
+  preload("/odysseus.png", {
+    as: "image",
+  });
+  preload("/projects/perseus.png", {
+    as: "image",
+  });
+  preload("/projects/logo.png", {
+    as: "image",
+  });
 
   return (
     <AnimatePresence
