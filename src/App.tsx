@@ -44,34 +44,38 @@ function AnimatedRoutes() {
         window.scrollTo(0, 0); // Scroll to top for the next page.
       }}
     >
-      <Suspense fallback={<SpinnerFullPage />}>
-        <Routes location={location} key={location.pathname}>
-          <Route
-            path="/"
-            element={
-              <MotionWrapper>
+      <Routes location={location} key={location.pathname}>
+        <Route
+          path="/"
+          element={
+            <MotionWrapper>
+              <Suspense fallback={<SpinnerFullPage />}>
                 <Homepage />
-              </MotionWrapper>
-            }
-          />
-          <Route
-            path="/:gameId"
-            element={
-              <MotionWrapper>
+              </Suspense>
+            </MotionWrapper>
+          }
+        />
+        <Route
+          path="/:gameId"
+          element={
+            <MotionWrapper>
+              <Suspense fallback={<SpinnerFullPage />}>
                 <GamePage />
-              </MotionWrapper>
-            }
-          />
-          <Route
-            path="*"
-            element={
-              <MotionWrapper>
+              </Suspense>
+            </MotionWrapper>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <MotionWrapper>
+              <Suspense fallback={<SpinnerFullPage />}>
                 <Homepage />
-              </MotionWrapper>
-            }
-          />
-        </Routes>
-      </Suspense>
+              </Suspense>
+            </MotionWrapper>
+          }
+        />
+      </Routes>
     </AnimatePresence>
   );
 }
