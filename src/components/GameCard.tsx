@@ -9,11 +9,16 @@ import {
 import type { Project } from "../types/Project";
 import { useNavigate } from "react-router-dom";
 import FadeInUp from "./FadeInUp";
+import { preload } from "react-dom";
 
 function GameCard({ project }: { project: Project }) {
   const navigate = useNavigate();
   const siteBtnColor = "#66bff3";
   const storeBtnColor = project.released ? "#75b022" : siteBtnColor;
+
+  preload(`/projects/${project.page}.jpg`, {
+    as: "image",
+  });
 
   return (
     <FadeInUp>
