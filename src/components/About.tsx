@@ -17,7 +17,7 @@ function About() {
           style={{ width: "91.5%" }}
         />
         <Typography variant="body2">
-          Absent Dragon is an independent game studio based in Australia and
+          Absent DUD Dragon is an independent game studio based in Australia and
           working with people around the world.
         </Typography>
 
