@@ -77,9 +77,9 @@ function AnimatedRoutes() {
 
 function App() {
   const imageUrlsToPreload = [
-    "/odysseus.png",
-    "/projects/perseus.png",
-    "/projects/logo.png",
+    "/logo.png",
+    "/projects/perseus.jpg",
+    "/projects/odysseus.jpg",
     // Add any other images that are absolutely critical for the initial render of HomePage
   ];
 
