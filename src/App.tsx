@@ -1,10 +1,9 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
-import Homepage from "./pages/Homepage";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import GamePage from "./pages/GamePage";
-import { type ReactNode } from "react";
+import { lazy, Suspense, type ReactNode } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import SpinnerFullPage from "./components/SpinnerFullPage";
 
 const theme = createTheme({
   typography: {
@@ -19,6 +18,9 @@ const theme = createTheme({
     },
   },
 });
+
+const Homepage = lazy(() => import("./pages/Homepage"));
+const GamePage = lazy(() => import("./pages/GamePage"));
 
 // Motion wrapper for page transitions
 const MotionWrapper = ({ children }: { children: ReactNode }) => (
@@ -42,32 +44,34 @@ function AnimatedRoutes() {
         window.scrollTo(0, 0); // Scroll to top for the next page.
       }}
     >
-      <Routes location={location} key={location.pathname}>
-        <Route
-          path="/"
-          element={
-            <MotionWrapper>
-              <Homepage />
-            </MotionWrapper>
-          }
-        />
-        <Route
-          path="/:gameId"
-          element={
-            <MotionWrapper>
-              <GamePage />
-            </MotionWrapper>
-          }
-        />
-        <Route
-          path="*"
-          element={
-            <MotionWrapper>
-              <Homepage />
-            </MotionWrapper>
-          }
-        />
-      </Routes>
+      <Suspense fallback={<SpinnerFullPage />}>
+        <Routes location={location} key={location.pathname}>
+          <Route
+            path="/"
+            element={
+              <MotionWrapper>
+                <Homepage />
+              </MotionWrapper>
+            }
+          />
+          <Route
+            path="/:gameId"
+            element={
+              <MotionWrapper>
+                <GamePage />
+              </MotionWrapper>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <MotionWrapper>
+                <Homepage />
+              </MotionWrapper>
+            }
+          />
+        </Routes>
+      </Suspense>
     </AnimatePresence>
   );
 }
