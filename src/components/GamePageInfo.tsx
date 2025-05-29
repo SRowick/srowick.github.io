@@ -52,7 +52,7 @@ function GamePageInfo({ project }: { project: Project }) {
         ></iframe>
 
         <Box sx={{ padding: 2 }}>
-          <Typography variant="h3" sx={{ fontFamily: "'Post Antiqua', serif" }}>
+          <Typography variant="h3" sx={{ fontFamily: "'Georgia', serif" }}>
             {project.released ? "Want to see more?" : "Sign up for the demo!"}
           </Typography>
 
