@@ -1,11 +1,9 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Suspense, type ReactNode } from "react";
+import { lazy, Suspense, type ReactNode } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import SpinnerFullPage from "./components/SpinnerFullPage";
-import Homepage from "./pages/Homepage";
-import GamePage from "./pages/GamePage";
 
 const theme = createTheme({
   typography: {
@@ -21,8 +19,8 @@ const theme = createTheme({
   },
 });
 
-// const Homepage = lazy(() => import("./pages/Homepage"));
-// const GamePage = lazy(() => import("./pages/GamePage"));
+const Homepage = lazy(() => import("./pages/Homepage"));
+const GamePage = lazy(() => import("./pages/GamePage"));
 
 // Motion wrapper for page transitions
 const MotionWrapper = ({ children }: { children: ReactNode }) => (
