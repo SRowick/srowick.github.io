@@ -5,6 +5,7 @@ import { lazy, Suspense, type ReactNode } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import SpinnerFullPage from "./components/SpinnerFullPage";
 import { preload } from "react-dom";
+import Homepage from "./pages/Homepage";
 
 const theme = createTheme({
   typography: {
@@ -20,7 +21,6 @@ const theme = createTheme({
   },
 });
 
-const Homepage = lazy(() => import("./pages/Homepage"));
 const GamePage = lazy(() => import("./pages/GamePage"));
 
 // Motion wrapper for page transitions
