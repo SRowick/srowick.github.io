@@ -1,13 +1,8 @@
 import { IconButton, Stack, Typography } from "@mui/material";
 import { FaDiscord, FaEnvelope, FaYoutube } from "react-icons/fa";
 import FadeInUp from "./FadeInUp";
-import { preload } from "react-dom";
 
 function About() {
-  preload("/logo.png", {
-    as: "image",
-  });
-
   return (
     <FadeInUp>
       <Stack maxWidth={250}>
