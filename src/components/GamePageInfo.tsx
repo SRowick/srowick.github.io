@@ -84,7 +84,6 @@ function GamePageInfo({ project }: { project: Project }) {
               <img
                 src={slide.src}
                 alt={`Screenshot ${idx}`}
-                loading="lazy"
                 style={{ borderRadius: 8 }}
               />
             </ImageListItem>
