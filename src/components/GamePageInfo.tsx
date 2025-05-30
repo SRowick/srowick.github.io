@@ -13,6 +13,7 @@ import FadeInUp from "./FadeInUp";
 import { useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
 
 function GamePageInfo({ project }: { project: Project }) {
   const navigate = useNavigate();
@@ -97,6 +98,14 @@ function GamePageInfo({ project }: { project: Project }) {
           slides={slides}
           noScroll={{ disabled: true }}
           styles={{ container: { backgroundColor: "black" } }}
+          plugins={[Zoom]}
+          zoom={{
+            maxZoomPixelRatio: 4,
+            zoomInMultiplier: 1.5,
+            doubleTapDelay: 300,
+            keyboardMoveDistance: 50,
+            // scrollToZoom: true,
+          }}
         />
 
         <Box>{project.longDesc}</Box>
